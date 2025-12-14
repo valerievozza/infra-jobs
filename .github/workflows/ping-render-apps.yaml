@@ -1,0 +1,26 @@
+name: Keep Render apps warm
+
+on:
+  schedule:
+    # Every hour 14:00–23:00 UTC
+    - cron: "0 14-23 * * *"
+    # Every hour 00:00–04:00 UTC
+    - cron: "0 0-4 * * *"
+  workflow_dispatch: # allow manual run from the Actions tab
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Render apps
+        run: |
+          URLS=(
+            https://mailroom-co4f.onrender.com/
+            # add more Render apps here later:
+            # https://whatever-else.onrender.com/
+          )
+
+          for u in "${URLS[@]}"; do
+            echo "Pinging $u"
+            curl -fsS "$u" || echo "⚠️ Failed to ping $u"
+          done
