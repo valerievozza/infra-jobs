@@ -16,8 +16,7 @@ jobs:
         run: |
           URLS=(
             https://mailroom-co4f.onrender.com/
-            # add more Render apps here later:
-            # https://whatever-else.onrender.com/
+            https://pocket-9bhp.onrender.com/
           )
 
           for u in "${URLS[@]}"; do
